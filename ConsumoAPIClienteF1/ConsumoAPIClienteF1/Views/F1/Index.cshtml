@@ -15,7 +15,7 @@
             <select id="temporadas" class="form-control"></select>
         </form>
 
-        <table class="table table-hover">
+        <table class="table table-hover" id="tablaDetalles" style="margin-top:20px;display:none">
             <thead class="thead-dark">
                 <tr>
                     <th>Carrera</th>
@@ -25,16 +25,22 @@
                     <th>Detalles</th>
                 </tr>
             </thead>
+            <tbody></tbody>
+        </table>
 
-            <tbody>
+
+        <table class="table table-hover" id="tablaDetallesCarrera" style="margin-top:100px; display:none">
+            <thead class="thead-dark">
                 <tr>
-                    <th scope="row">Carrera</th>
-                    <td>Circuito</td>
-                    <td>Localidad</td>
-                    <td>Pais</td>
-                    <td><i class="fas fa-info-circle"></i></td>                    
+                    <th colspan="4" class="text-center" id ="tituloTablaDetallesCarrera"></th>
                 </tr>
-                
-            </tbody>
+                <tr>
+                    <th>Posicion</th>
+                    <th>Conductor</th>
+                    <th>Equipo</th>
+                    <th>Puntos</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
         </table>
     </div>
