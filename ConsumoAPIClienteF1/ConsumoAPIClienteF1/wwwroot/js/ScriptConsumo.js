@@ -62,14 +62,18 @@ function cargaDatosTemporada(temp) {
                         $.each(value, function (key, value) {
                             
                             if (key === "Races") {
-                                Console.log(value);
+                                
                                 //Aquí estoy en el array de los datos de la carrera
-                                var html = "";
+                                var html = "<tr>";
                                 $.each(value, function (key, value) {
-                                    html += "<th scope='row'>" + value.Circuit.circuitId+"</tr>";
+                                    
+                                    html += "<th scope='row'>" + value.Circuit.circuitId+"</th>";
+                                    html += "</tr>";
+                                    alert("añadir los datos de las carreras");
                                     //console.log(value.Circuit.circuitId);
 
                                 });
+                                alert(html);
                                 
                             }
                             
