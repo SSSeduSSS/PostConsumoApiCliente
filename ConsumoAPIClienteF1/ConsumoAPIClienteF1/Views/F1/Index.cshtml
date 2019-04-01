@@ -1,15 +1,40 @@
-﻿
+﻿<link href="~/css/tablaTemporada.css" rel="stylesheet" />
 @{
     ViewData["Title"] = "Index";
 }
 
 @section scripts {
     <script src="~/js/ScriptConsumo.js"></script>
+
 }
-<h2>Histórico por temporadas</h2>
 
-<form>
-    <select id="temporadas" class="form-control"></select>
-</form>
+    <div style="margin-bottom:150px; margin-top:50px;">
+        <h2 class="text-center" style="margin-bottom:20px">Histórico por temporadas</h2>
 
-<label>Coger el CSS de App de recetas</label>
+        <form>
+            <select id="temporadas" class="form-control"></select>
+        </form>
+
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Carrera</th>
+                    <th>Circuito</th>
+                    <th>Localidad</th>
+                    <th>Pais</th>
+                    <th>Detalles</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th scope="row">Carrera</th>
+                    <td>Circuito</td>
+                    <td>Localidad</td>
+                    <td>Pais</td>
+                    <td><i class="fas fa-info-circle"></i></td>                    
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>

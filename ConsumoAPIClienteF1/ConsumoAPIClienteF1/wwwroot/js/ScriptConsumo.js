@@ -1,10 +1,19 @@
 ﻿$(document).ready(function () {
+    ajaxTemporadas();
+    $(document).on('change', "#temporadas", function () {
+        
+        cargaDatosTemporada(this.value);
+        
+    });
+});
+
+function ajaxTemporadas() {
     $.ajax({
         //El limit es para que me lo saque todo sin paginar
         url: 'https://ergast.com/api/f1/seasons.json?limit=80',
         dataType: "json",
-        success: function (respuesta) {            
-            console.log(respuesta);
+        success: function (respuesta) {
+            //console.log(respuesta);
 
             $.each(respuesta, function (key, value) {
                 //Recorro toda la respuesta que me devuelve la API
@@ -35,4 +44,44 @@
             alert("No se ha podido obtener la información");
         }
     });
-});
+}
+function cargaDatosTemporada(temp) {
+    $.ajax({
+        //El limit es para que me lo saque todo sin paginar
+        url: 'https://ergast.com/api/f1/'+temp+'.json',
+        dataType: "json",
+        success: function (respuesta) {
+            //console.log(respuesta);
+            $.each(respuesta, function (key, value) {
+                //Recojo todo el JSON que me devuelve la API
+                $.each(value, function (key, value) {
+                   //Recorro el json para buscar el nodo RaceTable
+                    console.log(value);
+                    if (key === "RaceTable") {                        
+                        //De todas la propiedades del objeto MrData recojo el valor del array SeasonTable
+                        $.each(value, function (key, value) {
+                            
+                            if (key === "Races") {
+                                Console.log(value);
+                                //Aquí estoy en el array de los datos de la carrera
+                                var html = "";
+                                $.each(value, function (key, value) {
+                                    html += "<th scope='row'>" + value.Circuit.circuitId+"</tr>";
+                                    //console.log(value.Circuit.circuitId);
+
+                                });
+                                
+                            }
+                            
+                           
+                        });
+                    }
+                });
+            });
+           
+        },
+        error: function () {
+            alert("No se ha podido obtener la información");
+        }
+    });
+}
