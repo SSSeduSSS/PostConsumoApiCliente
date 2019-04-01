@@ -1,18 +1,25 @@
 ﻿$(document).ready(function () {
-    ajaxTemporadas();
+
+    //Métoddo que carga la lista de temporadas al iniciar la web
+    ajaxTemporadas(); 
+
+    //Añadimos eventos dinámicos para que al cambiar 
     $(document).on('change', "#temporadas", function () {
-
-        cargaDatosTemporada(this.value);
-
+        cargaDatosTemporada(this.value); //llamada a la funci´´on para que traiga los detalles de esa temporada
     });
+
     $(document).on('click', "#detallesCarrera", function () {
         //Recupero los atributos de HTML5 con jquery
         var year = $(this).attr('data-year'); //Recupero el data de la celda
         var round = $(this).attr('data-event');//Recupero el data de la celda
+
         var nombre = $(this).attr('data-nombreCarrera');//Recupero el data de la celda
-        cargarDetallesCarrera(year, round,nombre);
+        cargarDetallesCarrera(year, round,nombre);//llamada a la función para cargar los detalles de esa carrera para el año seleccionado
     });
 });
+
+
+
 
 function ajaxTemporadas() {
     $.ajax({
@@ -52,6 +59,7 @@ function ajaxTemporadas() {
         }
     });
 }
+
 function cargaDatosTemporada(temp) {
     $.ajax({
         //El limit es para que me lo saque todo sin paginar
@@ -65,8 +73,7 @@ function cargaDatosTemporada(temp) {
                     if (key === "RaceTable") {
                         //De todas la propiedades del objeto MrData recojo el valor del array SeasonTable
                         $.each(value, function (key, value) {
-                            if (key === "Races") {
-                                
+                            if (key === "Races") {                                
                                 $("#tablaDetallesCarrera ").css("display", "none");
                                 $("#tablaDetalles").css("display", "block");
                                 $("#tablaDetalles tbody").html(""); //vacío el body de la tabla 
@@ -78,7 +85,7 @@ function cargaDatosTemporada(temp) {
                                     html += "<td>" + value.Circuit.circuitName + "</td>";
                                     html += "<td>" + value.Circuit.Location.locality + "</td>";
                                     html += "<td>" + value.Circuit.Location.country + "</td>";
-                                    html += "<td  id = 'detallesCarrera' data-nombreCarrera='" + value.raceName + "' data-year='" + temp + "' data-event='" + value.round + "' ><i class='fas fa-info-circle'></i></td>";
+                                    html += "<td  id = 'detallesCarrera' data-nombreCarrera='" + value.raceName + "' data-year='" + temp + "' data-event='" + value.round + "' > <i class='fas fa-info-circle'></i></td >";
                                     html += "</tr>";
                                 });
                                 $("#tablaDetalles").append(html);
@@ -95,6 +102,8 @@ function cargaDatosTemporada(temp) {
         }
     });
 }
+
+
 function cargarDetallesCarrera(temporada, carrera, nombreCarrera) {
 
     $.ajax({        
@@ -112,13 +121,10 @@ function cargarDetallesCarrera(temporada, carrera, nombreCarrera) {
                 $.each(respuesta, function (key, value) {
                     //console.log(value);
                     $.each(value.RaceTable.Races, function (key, value) {
-
                         var html = "";
                         $.each(value.Results, function (key, value) {
-
                             var nombre = value.Driver.givenName;
                             nombre += " " + value.Driver.familyName;
-
                             html += "<tr>";
                             html += "<th scope='row'>" + value.position + "</th>";          
                             html += "<td>" + nombre + "</td>";
